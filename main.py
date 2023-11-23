@@ -54,22 +54,10 @@ def print_input_order(order, sorted_words_list):
         sorted_words_list[order-1]
     except IndexError:
         print('Input is out of words list range.')
+    except TypeError:
+        print('Order must be an integer')
     else:
-        ones = order % 10
-        if order == 11:
-            print(f'The {order}th most frequent word in this file is:')
-        elif order == 12:
-            print(f'The {order}th most frequent word in this file is:')
-        elif order == 13:
-            print(f'The {order}th most frequent word in this file is:')
-        elif ones == 1:
-            print(f'The {order}st most frequent word in this file is:')
-        elif ones == 2:
-            print(f'The {order}nd most frequent word in this file is:')
-        elif ones == 3:
-            print(f'The {order}rd most frequent word in this file is:')
-        else :
-            print(f'The {order}th most frequent word in this file is:')
+        print(f'The {order}th most frequent word in this file is:')
         print(f'{sorted_words_list[order-1][0]} {sorted_words_list[order-1][1]}')
 
 
@@ -85,8 +73,7 @@ def main():
             print(
                 f'{order+1}. {sorted_words_list[order][0]} {sorted_words_list[order][1]:,}')
         print()
-        
-        
+
         try:
             order = ask_input_order()
         except ValueError:
