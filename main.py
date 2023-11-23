@@ -44,11 +44,7 @@ def ask_input_order():
         else:
             return order
         
-
-
-def check_input_order(order):
-    if order < 1:
-        raise ValueError
+    
 
 def print_input_order(order, sorted_words_list):
     try:
