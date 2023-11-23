@@ -12,7 +12,7 @@ def get_words_list(url):
     
     whole_book_no_punctuation = ''
     for character in whole_book:
-        if character.isalnum() == False:
+        if not character.isalnum():
             character = ' '
         whole_book_no_punctuation += character   
 
@@ -27,8 +27,7 @@ def sorted_by_word_count(words_list):
             words_count[word] += 1
         except KeyError:
             words_count[word] = 1
-    sorted_words_list = sorted(
-        words_count.items(), key=lambda x: x[1], reverse=True)
+    sorted_words_list = sorted(words_count.items(), key=lambda x: x[1], reverse=True)
     return sorted_words_list
 
 
@@ -43,8 +42,7 @@ def ask_input_order():
             raise ValueError
         else:
             return order
-        
-    
+
 
 def print_input_order(order, sorted_words_list):
     try:
