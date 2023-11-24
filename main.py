@@ -4,14 +4,20 @@ import sys
 
 def get_words_list(url):
     """
-    Return a words list from a e
+    Return a words list from URL as a plaintext file.
     
+    :url: a string
+    :postcondition: Read the plaintext and convert to words list
+    :return: a list if converting successfully
+    :return: None if converting failed
     """
     try:
         response = requests.get(url)
-    except requests.exceptions.MissingSchema:
+    # except requests.exceptions.MissingSchema:
+    except requests.exceptions.RequestException:
         print("Enter a correct URL")
-        return
+        return None
+    # response = requests.get(url)
     whole_book = response.text
     whole_book = whole_book.lower().strip()
     
@@ -26,6 +32,9 @@ def get_words_list(url):
 
 
 def sorted_by_word_count(words_list):
+    """
+    
+    """
     words_count = dict()
     for word in words_list:
         try:
@@ -83,6 +92,7 @@ def main(url):
     words_list = get_words_list(url)
     if words_list:
         sorted_words_list = sorted_by_word_count(words_list)
+        print(len(sorted_words_list))
         for order in range(10):
             print(
                 f'{order+1}. {sorted_words_list[order][0]} {sorted_words_list[order][1]:,}')
