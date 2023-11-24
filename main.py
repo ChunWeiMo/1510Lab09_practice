@@ -4,9 +4,9 @@ import sys
 
 def get_words_list(url):
     """
-    Return a words list from URL as a plaintext file.
+    Convert the plaintext file from a URL to a list.
     
-    :url: a string
+    :param url: a string
     :postcondition: Read the plaintext and convert to words list
     :return: a list if converting successfully
     :return: None if converting failed
@@ -33,7 +33,11 @@ def get_words_list(url):
 
 def sorted_by_word_count(words_list):
     """
+    Accept a words list, count and sort frequent words
     
+    :param words_list: a list
+    :postpostion: count the frequency of words and return a list by word frequency
+    :return: a list of sorted words list
     """
     words_count = dict()
     for word in words_list:
@@ -92,7 +96,6 @@ def main(url):
     words_list = get_words_list(url)
     if words_list:
         sorted_words_list = sorted_by_word_count(words_list)
-        print(len(sorted_words_list))
         for order in range(10):
             print(
                 f'{order+1}. {sorted_words_list[order][0]} {sorted_words_list[order][1]:,}')
