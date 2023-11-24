@@ -1,14 +1,19 @@
 import requests
+import sys
 
 
 def get_words_list(url):
+    """
+    Return a words list from a e
+    
+    """
     try:
         response = requests.get(url)
     except requests.exceptions.MissingSchema:
         print("Enter a correct URL")
         return
     whole_book = response.text
-    whole_book = whole_book.lower().rstrip().lstrip()
+    whole_book = whole_book.lower().strip()
     
     whole_book_no_punctuation = ''
     for character in whole_book:
@@ -36,12 +41,28 @@ def ask_input_order():
     try:
         order = int(order)
     except ValueError:
-        print("Please enter an integer")
+        print("Invalid input: Please enter an integer")
     else:
         if order < 1:
-            raise ValueError
+            raise ValueError("Invalid input: Pleas enter a positive number.")
         else:
             return order
+
+
+# def ask_input_order():
+#     order = input('Enter a positive integer: ')
+#     # if type(order) != int or order <1:
+#     #     raise ValueError("Only accept a positive integer!")
+    
+#     try:
+#         return int(order)
+#     except ValueError:
+#         print("Please enter an integer")
+    # else:
+    #     if order < 1:
+    #         raise ValueError("Pleas enter a positive number.")
+    #     else:
+    #         return order
 
 
 def print_input_order(order, sorted_words_list):
@@ -50,15 +71,15 @@ def print_input_order(order, sorted_words_list):
     except IndexError:
         print('Input is out of words list range.')
     except TypeError:
-        print('Order must be an integer')
+        print('Invalid input: Order must be an integer')
     else:
         print(f'The {order}th most frequent word in this file is:')
         print(f'{sorted_words_list[order-1][0]} {sorted_words_list[order-1][1]}')
 
 
-def main():
+def main(url):
     # url = "https://www.gutenberg.org/cache/epub/2554/pg2554.txt"  # Lab09 file
-    url = "https://www.gutenberg.org/cache/epub/72013/pg72013.txt"  # the book I pick
+    # url = "https://www.gutenberg.org/cache/epub/72013/pg72013.txt"  # the book I pick
     words_list = get_words_list(url)
     if words_list:
         sorted_words_list = sorted_by_word_count(words_list)
@@ -69,13 +90,15 @@ def main():
 
         try:
             order = ask_input_order()
-        except ValueError:
-            print("Pleas enter a positive number.")
+        except ValueError as e:
+            print(e)
         else:
-            print_input_order(order, sorted_words_list)
+            # print(order)
+            if order:
+                print_input_order(order, sorted_words_list)
         finally:
             print("\nPROGRAM END.")
     
 
 if __name__ == '__main__':
-    main()
+    main(sys.argv[1])
