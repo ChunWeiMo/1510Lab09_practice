@@ -13,11 +13,9 @@ def get_words_list(url):
     """
     try:
         response = requests.get(url)
-    # except requests.exceptions.MissingSchema:
     except requests.exceptions.RequestException:
         print("Enter a correct URL")
         return None
-    # response = requests.get(url)
     whole_book = response.text
     whole_book = whole_book.lower().strip()
     
@@ -60,22 +58,6 @@ def ask_input_order():
             raise ValueError("Invalid input: Pleas enter a positive number.")
         else:
             return order
-
-
-# def ask_input_order():
-#     order = input('Enter a positive integer: ')
-#     # if type(order) != int or order <1:
-#     #     raise ValueError("Only accept a positive integer!")
-    
-#     try:
-#         return int(order)
-#     except ValueError:
-#         print("Please enter an integer")
-    # else:
-    #     if order < 1:
-    #         raise ValueError("Pleas enter a positive number.")
-    #     else:
-    #         return order
 
 
 def print_input_order(order, sorted_words_list):
