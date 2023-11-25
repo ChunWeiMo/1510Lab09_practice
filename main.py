@@ -48,6 +48,12 @@ def sorted_by_word_count(words_list):
 
 
 def ask_input_order():
+    """
+    Ask user to input a positive integer.
+    
+    :postcondition:return a positive integer
+    :return: an integer
+    """
     order = input('Enter a positive integer: ')
     try:
         order = int(order)
@@ -61,6 +67,13 @@ def ask_input_order():
 
 
 def print_input_order(order, sorted_words_list):
+    """
+    Print the word that is at the order.
+    
+    :param order: an integer
+    :param sorted_words_list: a list
+    :postcondition: print the order and the corresponding word
+    """
     try:
         sorted_words_list[order-1]
     except IndexError:
@@ -73,6 +86,9 @@ def print_input_order(order, sorted_words_list):
 
 
 def main(url):
+    """
+    Drive the program.
+    """
     # url = "https://www.gutenberg.org/cache/epub/2554/pg2554.txt"  # Lab09 file
     # url = "https://www.gutenberg.org/cache/epub/72013/pg72013.txt"  # the book I pick
     words_list = get_words_list(url)
